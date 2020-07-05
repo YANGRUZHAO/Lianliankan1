@@ -32,7 +32,7 @@ public class StartMain {
 		
         new PlayerLogin().setVisible(true);
         System.out.println("dasd   dfsd");
-        
+        //p.stop();
 		//login.setVisible(true); 
 	
    }

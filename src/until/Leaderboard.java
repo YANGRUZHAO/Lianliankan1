@@ -42,7 +42,7 @@ public class Leaderboard {
 	 * 该方法为从文件中读取玩家过关信息
 	 * @return 返回所有玩家过关信息
 	 */
-	public static  List    Read_List() {
+	public static  List  Read_List() {
 		String[] Str = new String[11];
 		Map<String, Integer> map1 = new TreeMap<String,Integer>();;
 		String name = "";
@@ -50,7 +50,7 @@ public class Leaderboard {
 		try { // 防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw
            String record;
            int index;
-           File file = new File("D:\\All_Code\\Java\\Lianliankan\\Leaderboard.txt");
+           File file = new File("D:\\All_Code\\Java\\Lianliankan1\\Leaderboard.txt");
            RandomAccessFile raf = new RandomAccessFile(file,"rw");
            while(raf.getFilePointer() < raf.length()) {
            	record = raf.readLine();
@@ -79,10 +79,8 @@ public class Leaderboard {
             }
             
         });
-	      return list;
-		
-    
-        
+	    return list;
+
 	}
     /**
      * 该方法为向文件中写入玩家过关信息
@@ -101,5 +99,9 @@ public class Leaderboard {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
+	}
+	
+	public static void Delete_List(String name,int score) {
+		
 	}
 }

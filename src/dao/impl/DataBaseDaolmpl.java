@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.mysql.cj.xdevapi.Statement;
+
 import dao.DataBaseDao;
 import test.Player;
 /**
@@ -125,5 +127,66 @@ public class DataBaseDaolmpl implements DataBaseDao {
 		}
 		return true;
 	}
+	
+	public boolean delete(Player p) {
+		String account = p.getAccount();
+		String password = p.getPassword();
+		if (conn == null)
+			return false;
+		if (account == null)
+			return false;
+		if (password == null)
+			return false;
+		// 定义SQL语句
+		String sql="delete from player where account = ?";//生成一条sql语句
+		ResultSet rs = null;
 
+		boolean flag = false;
+
+		try {
+			// 预编译SQL语句
+			pstate = conn.prepareStatement(sql);
+			// 设置插入值
+			pstate.setString(1, p.getAccount());
+			// 执行SQL更新操作
+			pstate.executeUpdate();
+			flag = true;
+			
+		} catch (SQLException e) {
+			System.out.println("数据库查询异常！");
+		} finally {
+			// 释放数据库资源
+			if (pstate != null)
+				try {
+					pstate.close();
+					conn.close();
+				} catch (SQLException e) {
+					System.out.println("释放数据库资源异常");
+				}
+			return flag;
+		}
+	}
+	// 更新数据库中用户账号中密码
+		@Override
+		public boolean update(String account, String password) {
+			if (conn == null)
+				return false;
+
+			// 定义SQL语句
+			String sql = "update player set password=? where account=?;";
+
+			try {
+				// 预编译SQL语句
+				pstate = conn.prepareStatement(sql);
+				// 设置数值
+				pstate.setString(1, password);
+				pstate.setString(2, account);
+				// 执行SQL语句
+				pstate.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("数据库更新操作发生一点小问题！");
+				return false;
+			}
+			return true;
+		}
 }

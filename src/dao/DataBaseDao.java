@@ -43,4 +43,13 @@ public interface DataBaseDao {
      * @return  添加成功返回true，否则false
      */
 	public abstract boolean insert(Player p);
+	
+	/**
+	 * 向数据库删除一个玩家信息
+	 * @param p 删除的玩家信息
+	 * @return 删除成功返回true，否则false
+	 */
+	public abstract boolean delete(Player p);
+	
+	public boolean update(String account, String password);
 }

@@ -26,5 +26,8 @@ public interface PlayerDao {
 	 * @return 注册成功返回ture，否则返回false
 	 */
 	public abstract boolean register(Player p);
+	
+	public abstract boolean delete(Player p);
+	public abstract boolean update(Player p);
 }
 

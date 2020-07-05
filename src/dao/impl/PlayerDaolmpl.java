@@ -32,4 +32,13 @@ public class PlayerDaolmpl implements PlayerDao{
 		return new DataBaseDaolmpl().insert(p);
 	}
 	
+	public boolean delete(Player p) {
+		return new DataBaseDaolmpl().delete(p);
+	}
+	
+	public boolean update(Player p) {
+		String account = p.getAccount();
+		String password = p.getPassword();
+		return new DataBaseDaolmpl().update(account,password);
+	}
 }

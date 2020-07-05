@@ -56,7 +56,7 @@ public class LevelPanel_view extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-
+ 
 		JLabel label = new JLabel("历史最快过关排行榜");
 		label.setForeground(Color.RED);
 		label.setFont(new Font("宋体", Font.PLAIN, 25));

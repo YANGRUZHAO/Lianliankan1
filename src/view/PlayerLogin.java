@@ -117,5 +117,28 @@ public class PlayerLogin extends JFrame {
 		});
 		btnNewButton_2.setBounds(220, 130, 80, 27);
 		contentPane.add(btnNewButton_2);
+		
+		
+		JButton btnNewButton_3 = new JButton("删除账号");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Delete_user().setVisible(true);
+				(PlayerLogin.this).dispose();
+			}
+		});
+		btnNewButton_3.setBounds(220, 160, 80, 27);
+		contentPane.add(btnNewButton_3);
+		
+		JButton btnNewButton_5 = new JButton("修改密码");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// 跳转注册界面动作
+				new updatepass().setVisible(true);
+				(PlayerLogin.this).dispose();
+			}
+		});
+		btnNewButton_5.setBounds(120, 160, 80, 27);
+		
+		contentPane.add(btnNewButton_5);
 	}
 }
