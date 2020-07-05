@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -39,6 +40,8 @@ public class LevelPanel_view extends JFrame {
 	private Object title[];
 	// 表格数据
 	private Object data[][]=new Object[6][2];
+	
+	private JTextField textField;
 	/**
 	 * 显示排行榜及其各种信息
 	 * @param account 登录中的玩家账号
@@ -51,7 +54,7 @@ public class LevelPanel_view extends JFrame {
 	//	setIconImage(Toolkit.getDefaultToolkit().getImage(HighestScoreJFrame.class.getResource("/images/apple.png")));
 		setTitle("历史最快");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 371, 340);
+		setBounds(100, 100, 700,500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -62,21 +65,21 @@ public class LevelPanel_view extends JFrame {
 		label.setFont(new Font("宋体", Font.PLAIN, 25));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label, BorderLayout.NORTH);
-
-		JButton button = new JButton("\u8FD4  \u56DE");
+		JPanel panel = new JPanel(); //返回
+		contentPane.add(panel, BorderLayout.SOUTH);
+		JButton button = new JButton("返回");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gotoChoice();
 			}
 		});
 		button.setFont(new Font("宋体", Font.PLAIN, 20));
-		contentPane.add(button, BorderLayout.SOUTH);
+		panel.add(button, BorderLayout.SOUTH);
 
 		// 准备表格的标题和数据
 		title = new Object[] { "玩家", "最快速度" };
 		
 		
-		//String[] str = new String[11];
 		List<Map.Entry<String,Integer>> list = Leaderboard.Read_List();
         int i = 0;
         for(Map.Entry<String,Integer> mapping:list){ 
@@ -103,6 +106,42 @@ public class LevelPanel_view extends JFrame {
 
 		// 设置窗体居中
 	//	this.setLocation(JFrameToolUtil.centerLocation(new Point(this.getWidth(), this.getHeight())));
+		
+		JButton btnNewButton = new JButton("\u5220\u9664\u6211\u7684\u8D26\u53F7\u6392\u884C\u699C\u4FE1\u606F");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				until.Leaderboard.deleteAccountRank(account);
+
+				new LevelPanel_view(account).setVisible(true);
+				(LevelPanel_view.this).dispose();
+
+			}
+		});
+		btnNewButton.setFont(new Font("宋体", Font.PLAIN, 20));
+		panel.add(btnNewButton);
+		
+		textField = new JTextField();
+		textField.setBounds(500, 500, 138, 24);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton1 = new JButton("修改该账号得分：");
+		btnNewButton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				// 删除玩家的所有通关得分记录
+				String score = textField.getText();
+				until.Leaderboard.updateAccountScore(account,Integer.valueOf(score));
+
+				new LevelPanel_view(account).setVisible(true);
+				(LevelPanel_view.this).dispose();
+			}
+		});
+		btnNewButton1.setFont(new Font("宋体", Font.PLAIN, 20));
+		panel.add(btnNewButton1);
+		
+		
 	}
 
 	/**
